@@ -3,6 +3,7 @@ import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/a
 import { useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import google from '../../../images/social/download.png'
+import Loading from '../../Shared/Loadding/Loading';
 
 const SocialLogIn = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -11,9 +12,14 @@ const SocialLogIn = () => {
     const navigate = useNavigate()
 
     let errorElement;
+
+    if(loading || loading1){
+        return <Loading></Loading>
+    }
+
     if (error || error1) {
         errorElement= (
-          
+
             <p className='text-center'>Error: {error?.message} {error1?.message}</p>
        
         );
